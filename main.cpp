@@ -1,10 +1,13 @@
 #include <iostream>
 #include <boost/array.hpp>
 #include <boost/program_options.hpp>
+#include <vector>
+
 using namespace std;
 using namespace boost;
 namespace po = boost::program_options;
-int main(int argc, char* argv[]) {
+
+int main(int argc, char *argv[]) {
     po::options_description desc("Program options");
     desc.add_options()
             ("help", "print info")
@@ -15,7 +18,7 @@ int main(int argc, char* argv[]) {
 
     po::store(parsed, vm);
     po::notify(vm);
-    if(vm.count("help")) {
+    if (vm.count("help")) {
         cout << desc << endl;
         getchar();
         return 1;
@@ -26,7 +29,7 @@ int main(int argc, char* argv[]) {
         filename = vm["filename"].as<string>();
     }
     cout << "Processing file " << filename << endl;
-    boost::array<string, 10>  arr;
+    boost::array<string, 10> arr;
     cout << arr.size() << endl;
 
 
@@ -34,15 +37,31 @@ int main(int argc, char* argv[]) {
 
     int value;
     po::options_description desc2("my file processor");
-    desc2.add_options(
-            ("value, v", po::value<int>(&value)->default_value(42)),
-            "input value");
+    desc2.add_options()
+            ("value, v", po::value<int>(&value)->default_value(42),
+            "input value")
+    ("files", po::value<vector<string>>()->multitoken(),
+            "input files");
+    po::positional_options_description pos;
+    pos.add("files", -1);
+    po::command_line_parser parser(argc, argv);
+    auto parsed_options = parser.options(desc).positional(pos).run();
+    po::store(parsed_options, vm);
 
-   po::variables_map vm2;
-   po::store(po::parse_command_line(argc, argv, desc), vm2);
-   po::notify(vm2);
 
-   cout << "the value is " << value << endl;
+    po::variables_map vm2;
+    po::store(po::parse_command_line(argc, argv, desc), vm2);
+    po::notify(vm2);
+
+    cout << "the value is " << value << endl;
+
+    if(vm.count("files")) {
+        init i = 0;
+        auto files = vm["files"].as<vector<string>>();
+        for(auto s: files) {
+            cout << (++i) << ": " << s << endl;
+        }
+    }
 
 
     return 0;

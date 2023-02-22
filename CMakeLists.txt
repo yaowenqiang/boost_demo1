@@ -4,9 +4,9 @@ project(boost_demo1)
 set(CMAKE_CXX_STANDARD 14)
 
 set(BOOST_ROOT "/Users/jack/Downloads/boost_1_65_1")
-set(Boost_LIBRARY_DIR "/Users/jack/Downloads/boost_1_65_1/libs")
+set(Boost_LIBRARY_DIR "/Users/jack/Downloads/boost_1_65_1/boost")
 include_directories(${Boost_INCLUDE_DIR})
-include_directories(${Boost_LIBRARY_DIR})
+include_directories(${Boost_LIBRARY_DIR}/boost)
 
 #find_package(Boost 1.65.1 COMPONENTS system filesystem REQUIRED)
 
@@ -24,4 +24,5 @@ else()
 endif()
 
 add_executable(boost_demo1 main.cpp)
+target_link_libraries(boost_demo1 ${Boost_LIBRARIES})
 
