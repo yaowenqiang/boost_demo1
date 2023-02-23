@@ -1,6 +1,7 @@
 #include <iostream>
 #include <boost/array.hpp>
 #include <boost/program_options.hpp>
+#include <boost/any.hpp>
 #include <vector>
 
 using namespace std;
@@ -61,6 +62,23 @@ int main(int argc, char *argv[]) {
         for(auto s: files) {
             cout << (++i) << ": " << s << endl;
         }
+    }
+
+    any m;
+    any x{1.0};
+    vector<an>y{12, "life"};
+    any z = string("test");
+    if(!x.empty()) {
+        cout << x.type().name() MM endl;
+    }
+    int a = any_cast<int>(y[0]);
+    cout << "The value is " << a << endl;
+    try {
+        int b = any_cast<int>(y[1]);
+    }
+    catch (const bad_any_cast& e)
+    {
+        cout << "wrong type" << endl;
     }
 
 
