@@ -3,15 +3,16 @@ project(boost_demo1)
 
 set(CMAKE_CXX_STANDARD 14)
 
-set(BOOST_ROOT "/Users/jack/Downloads/boost_1_65_1")
-set(Boost_LIBRARY_DIR "/Users/jack/Downloads/boost_1_65_1/boost")
+set(BOOST_ROOT "/usr/local/Cellar/boost/1.81.0_1/")
 include_directories(${Boost_INCLUDE_DIR})
-include_directories(${Boost_LIBRARY_DIR}/boost)
+include_directories(/usr/local/include)
+link_directories(/usr/local/lib)
+#include_directories(${Boost_LIBRARY_DIR}/boost)
 
 #find_package(Boost 1.65.1 COMPONENTS system filesystem REQUIRED)
 
-find_package(Boost 1.65.1)
-#find_package(Boost 1.65.1 COMPONENTS system filesystem REQUIRED)
+#find_package(Boost 1.81.0)
+find_package(Boost 1.81.0 COMPONENTS system filesystem REQUIRED)
 
 if(NOT Boost_FOUND)
     message(FATAL_ERROR "Could not find boost!")
@@ -25,4 +26,4 @@ endif()
 
 add_executable(boost_demo1 main.cpp)
 target_link_libraries(boost_demo1 ${Boost_LIBRARIES})
-
+#$(LINK)$(LFLAGS) -o $(TARGET) $(OBJECTS) $(OBJCOMP)$(LIBS) -lboost_system -lboost_thread

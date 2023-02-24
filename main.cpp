@@ -3,6 +3,8 @@
 #include <boost/program_options.hpp>
 #include <boost/any.hpp>
 #include <vector>
+#include <boost/version.hpp>
+
 
 using namespace std;
 using namespace boost;
@@ -57,7 +59,7 @@ int main(int argc, char *argv[]) {
     cout << "the value is " << value << endl;
 
     if(vm.count("files")) {
-        init i = 0;
+        int i = 0;
         auto files = vm["files"].as<vector<string>>();
         for(auto s: files) {
             cout << (++i) << ": " << s << endl;
@@ -65,11 +67,11 @@ int main(int argc, char *argv[]) {
     }
 
     any m;
-    any x{1.0};
-    vector<an>y{12, "life"};
+    any x {1.0};
+    vector<any> y {12, "life"};
     any z = string("test");
     if(!x.empty()) {
-        cout << x.type().name() MM endl;
+        cout << x.type().name() << endl;
     }
     int a = any_cast<int>(y[0]);
     cout << "The value is " << a << endl;
@@ -82,5 +84,6 @@ int main(int argc, char *argv[]) {
     }
 
 
+    cout << "Boost版本：" << BOOST_VERSION << endl;
     return 0;
 }
