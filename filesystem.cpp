@@ -4,6 +4,17 @@ using namespace boost;
 using namespace std;
 using namespace boost::filesystem;
 
+void dir_nav(path& dir) {
+    directory_iterator end;
+    for (directory_iterator i(dir); i != end; i++) {
+        path p = i->path();
+        if (is_regular(p)) {
+            cout << p.filename() << endl;
+        }
+
+    }
+}
+
 void check_path(const char* p)
 {
     path myPath(p);
@@ -41,5 +52,7 @@ int main(int argc, char* argv[]) {
         cout << e.what() << endl;
     }
 
+    auto parent = path(argv[0]).parent_path().parent_path();
+    dir_nav(parent);
     return 0;
 }
