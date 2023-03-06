@@ -9,3 +9,8 @@
 > linux use gcc to generate preprocess file 
 
 > gcc +e main.c -o main.s
+
+> gcc main.c -o main -Wall
+> gcc main.c -o main -Wall -std=c99
+> gcc main.c multiply.c -o main  -Wall -std=c99  -Wextra -pedantic
+
