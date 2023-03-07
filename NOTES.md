@@ -14,3 +14,7 @@
 > gcc main.c -o main -Wall -std=c99
 > gcc main.c multiply.c -o main  -Wall -std=c99  -Wextra -pedantic
 
+
+## install mingw
+
+> nuwen.net 
